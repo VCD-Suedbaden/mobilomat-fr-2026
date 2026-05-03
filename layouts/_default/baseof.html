@@ -42,7 +42,7 @@
       content="#e3f6f8"
       media="(prefers-color-scheme: light)"
     />
-    <title>{{ .Title }}</title>
+    <title>{{ with .Title }}{{ . }}{{ else }}{{ site.Title }}{{ end }}</title>
     <meta property="og:title" content="{{ .Site.Title }}" />
     <meta
       property="og:description"
