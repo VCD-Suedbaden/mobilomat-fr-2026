@@ -1,4 +1,4 @@
-# Mobil-O-Mat OB-Wahl Freiburg 2026
+# VCD Mobil-O-Mat
 
 ## Requirements
 
