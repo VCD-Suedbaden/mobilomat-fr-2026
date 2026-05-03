@@ -12,7 +12,7 @@ $badges := dict "1" "vote-badge-pro" "0" "vote-badge-neutral" "-1"
         class="w-fit rotate-[-3deg] rounded-xl bg-vcd-green/80 px-4 py-1 sm:py-3 text-center backdrop-blur-sm dark:bg-vcd-green/70 outline outline-1 outline-transparent"
       >
         <h1 class="text-2xl font-black tracking-wide text-white sm:text-5xl">
-          Mein Ergebnis
+          {{ site.Params.resultsTitle }}
         </h1>
       </div>
     </div>
@@ -21,7 +21,7 @@ $badges := dict "1" "vote-badge-pro" "0" "vote-badge-neutral" "-1"
         class="rotate-[2deg] rounded-xl bg-vcd-petrol/80 px-3 py-1 sm:py-2 sm:px-4 text-center backdrop-blur-sm dark:bg-vcd-petrol/70 outline outline-1 outline-transparent"
       >
         <p class="text-xs font-medium text-white sm:text-lg">
-          Vergleich mit den Freiburger OB-Kandidierenden
+          {{ site.Params.resultsSubtitle }}
         </p>
       </div>
     </div>

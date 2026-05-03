@@ -157,7 +157,8 @@ function initErgebnisPage() {
   document
     .getElementById("share-btn")
     .addEventListener("click", async function () {
-      const title = "Mein Mobil-O-Mat-Ergebnis für die OB-Wahl:";
+      const title =
+        window.MOBILOMAT_SHARE_TITLE ?? "Mein Mobil-O-Mat-Ergebnis:";
       const ranking = results
         .map((r, i) => `${i + 1}. ${r.name}: ${r.pct}%`)
         .join("\n");

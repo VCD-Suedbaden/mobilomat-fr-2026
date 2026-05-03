@@ -10,6 +10,8 @@ jobs:
       # hugo version
       HUGO_VERSION: 0.161.1
       TZ: Europe/Berlin
+      BASE_URL: https://mobilomat-freiburg.de
+      HUGO_ENVIRONMENT: production
     steps:
       - uses: actions/checkout@v6
         with:
@@ -34,11 +36,6 @@ jobs:
         run: sudo dpkg -i ${{ runner.temp }}/hugo.deb
       - name: Configure Git
         run: git config core.quotepath false
-      # Here a PR is needed to have 'head'. See comment at the beginning of file.
-      - name: Set base URL, Hugo environment
-        run: |
-          echo "BASE_URL=https://mobilomat-freiburg.de" >> "$GITHUB_ENV"
-          echo "HUGO_ENVIRONMENT=production" >> "$GITHUB_ENV"
       - name: Build with Hugo
         run: |-
           hugo \

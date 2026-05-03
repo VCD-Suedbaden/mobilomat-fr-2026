@@ -22,7 +22,7 @@ $questions }} {{ $stances := (index $questions 0).stances }} {{ $names := slice
         >
           <span class="tracking-wide">Mobil-O-Mat</span>
           <span class="text-sm font-bold leading-none tracking-wide sm:text-2xl"
-            >OB-Wahl Freiburg</span
+            >{{ site.Params.welcomeTitle }}</span
           >
         </h1>
       </div>
@@ -31,8 +31,7 @@ $questions }} {{ $stances := (index $questions 0).stances }} {{ $names := slice
           class="w-full rotate-[2deg] rounded-2xl bg-vcd-petrol/70 px-2 py-1.5 sm:px-5 sm:py-4 text-center backdrop-blur-sm outline outline-1 outline-transparent"
         >
           <p class="text-sm font-medium leading-snug text-white sm:text-lg">
-            Teste schnell und einfach, welche OB-Kandidierenden deine Positionen
-            teilen!
+            {{ site.Params.welcomeSubtitle }}
           </p>
         </div>
       </div>
@@ -41,8 +40,8 @@ $questions }} {{ $stances := (index $questions 0).stances }} {{ $names := slice
     <div class="p-4 pt-8 sm:p-6 sm:pt-8">
       <div class="card mb-4 bg-white dark:bg-vcd-petrol/10">
         <p class="leading-relaxed text-stone-600 dark:text-stone-300">
-          Beantworte {{ $total }} Fragen zu Mobilitätsthemen und vergleiche
-          Deine Antworten mit
+          {{ replace site.Params.welcomeIntro "{totalQuestions}" ($total |
+          string) }}
           <span class="font-semibold tracking-wide"
             >{{ range $i, $name := $names }}{{ if gt $i 0 }}{{ if eq $i (sub
             (len $names) 1) }} und {{ else }}, {{ end }}{{ end }}<span
