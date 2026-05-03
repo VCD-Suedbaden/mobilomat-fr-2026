@@ -44,7 +44,7 @@ jobs:
             --baseURL "${{ env.BASE_URL }}/"
       # https://community.netcup.com/en/tutorials/automating-deployment-with-github-actions
       - name: Copy dir public/ with FTP to server
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.FTP_SERVER_IP }}
           username: ${{ secrets.FTP_USERNAME }}
