@@ -78,6 +78,6 @@ append .position }} {{ end }} {{ end }} {{ end }} {{ $posMap = merge $posMap
 </div>
 
 <script>
-  initFragePage({{ $qi }}, {{ $posMap | jsonify | safeJS }});
+  initErgebnisFragePage({{ $qi }}, {{ $posMap | jsonify | safeJS }});
 </script>
 {{ end }}

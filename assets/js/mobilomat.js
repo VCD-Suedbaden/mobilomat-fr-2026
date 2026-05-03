@@ -174,7 +174,7 @@ function initErgebnisPage() {
     });
 }
 
-function initFragePage(qi, candidatePositions) {
+function initErgebnisFragePage(qi, candidatePositions) {
   const param = new URLSearchParams(location.search).get("a") || "";
   const answers = parseAnswers(param);
   if (param)
