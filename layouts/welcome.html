@@ -20,9 +20,9 @@ $questions }} {{ $stances := (index $questions 0).stances }} {{ $names := slice
         <h1
           class="flex flex-col items-center gap-0 text-4xl font-black tracking-tight text-white sm:text-6xl whitespace-nowrap"
         >
-          <span class="tracking-wide">Mobil-O-Mat</span>
+          <span class="tracking-wide">{{ site.Params.welcomeTitle }}</span>
           <span class="text-sm font-bold leading-none tracking-wide sm:text-2xl"
-            >{{ site.Params.welcomeTitle }}</span
+            >{{ site.Params.welcomeSubtitle }}</span
           >
         </h1>
       </div>
@@ -31,7 +31,7 @@ $questions }} {{ $stances := (index $questions 0).stances }} {{ $names := slice
           class="w-full rotate-2 rounded-2xl bg-vcd-petrol/70 px-2 py-1.5 sm:px-5 sm:py-4 text-center backdrop-blur-sm outline outline-1 outline-transparent"
         >
           <p class="text-sm font-medium leading-snug text-white sm:text-lg">
-            {{ site.Params.welcomeSubtitle }}
+            {{ site.Params.welcomeSubtext }}
           </p>
         </div>
       </div>
