@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # hugo version
-      HUGO_VERSION: 0.160.1
+      HUGO_VERSION: 0.161.1
       TZ: Europe/Berlin
     steps:
       - uses: actions/checkout@v6
