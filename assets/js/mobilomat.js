@@ -92,7 +92,7 @@ function initFragenPage(qi, nextUrl) {
   }
 }
 
-function initErgebnisPage() {
+function initErgebnisPage(shareTitle) {
   const PARAM = new URLSearchParams(location.search).get("a") || "";
   const answers = parseAnswers(PARAM);
 
@@ -157,8 +157,7 @@ function initErgebnisPage() {
   document
     .getElementById("share-btn")
     .addEventListener("click", async function () {
-      const title =
-        window.MOBILOMAT_SHARE_TITLE ?? "Mein Mobil-O-Mat-Ergebnis:";
+      const title = shareTitle ?? "Mein Mobil-O-Mat-Ergebnis:";
       const ranking = results
         .map((r, i) => `${i + 1}. ${r.name}: ${r.pct}%`)
         .join("\n");
