@@ -11,6 +11,8 @@ markup:
   highlight:
     noClasses: false
 enableRobotsTXT: false
+# This is needed for candidates with accent marks in characters (ć, è, é, ...)
+removePathAccents: true
 params:
   imprintURL: "https://bw.vcd.org/der-vcd-in-bw/suedbaden/impressum"
   welcomeTitle: "OB-Wahl Freiburg"
@@ -19,6 +21,5 @@ params:
   disclaimer: "Kandidierende, die weder innerhalb der zweiwöchigen Frist noch innerhalb der zusätzlichen, zweiten mehrtägigen Frist auf unsere Anfrage geantwortet haben, wurden nicht berücksichtigt. Mobil-O-Mat ist ein kostenloses Informationstool, das vom VCD bereitgestellt wird. Die Inhalte spiegeln die Perspektive des Vereins wider und erheben keinen Anspruch auf vollständige politische Neutralität oder Vollständigkeit."
   resultsTitle: "Mein Ergebnis"
   resultsSubtitle: "Vergleich mit den Freiburger OB-Kandidierenden"
-  vcdChapterURL: "https://bw.vcd.org/der-vcd-in-bw/freiburg"
+  vcdLogoURL: "https://bw.vcd.org/der-vcd-in-bw/freiburg"
   shareTitle: "Mein Mobil-O-Mat-Ergebnis für die OB-Wahl:"
-removePathAccents: true
