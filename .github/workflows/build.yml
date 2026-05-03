@@ -11,6 +11,7 @@ jobs:
       HUGO_VERSION: 0.161.1
       TZ: Europe/Berlin
       BASE_URL: https://mobilomat-freiburg.de
+      SERVER_DIR: mobilomat-freiburg.de/httpdocs/
       HUGO_ENVIRONMENT: production
     steps:
       - uses: actions/checkout@v6
@@ -50,5 +51,5 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           # FTP user in netcup has path / (root) for "Basisverzeichnis"
-          server-dir: mobilomat-freiburg.de/httpdocs/
+          server-dir: ${{ env.SERVER_DIR }}
           local-dir: ./public/
