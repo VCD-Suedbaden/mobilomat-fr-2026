@@ -1,0 +1,85 @@
+# Inspired by
+# https://gohugo.io/host-and-deploy/host-on-github-pages/
+# https://gohugo.io/host-and-deploy/host-on-gitlab-pages/
+# https://schnerring.net/blog/create-a-hugo-website-with-github-pages-github-actions-and-cloudflare/
+# https://github.com/schnerring/schnerring.github.io/blob/main/.github/workflows/publish.yml
+name: Deploy Hugo site to Cloudflare
+on:
+  push:
+    branches:
+      - main
+  # Run other branches only on PRs to avoid https://github.com/cloudflare/workers-sdk/issues/2410.
+  # In a GitHub Action triggered by a PR wrangler uses 'head':
+  # https://head.<CLOUDFLARE_PROJECT_NAME>.pages.dev
+  pull_request:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      # hugo version
+      HUGO_VERSION: 0.161.1
+      TZ: Europe/Berlin
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
+      - name: Cache Hugo .deb
+        id: cache-hugo
+        uses: actions/cache@v5
+        with:
+          path: ${{ runner.temp }}/hugo.deb
+          key: hugo-${{ env.HUGO_VERSION }}
+      - name: Download Hugo CLI if not cached
+        if: steps.cache-hugo.outputs.cache-hit != 'true'
+        run: wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb
+      - name: Install Hugo CLI
+        run: sudo dpkg -i ${{ runner.temp }}/hugo.deb
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: "package.json"
+      - name: Install Node.js dependencies
+        run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
+      - name: Configure Git
+        run: git config core.quotepath false
+      # Here a PR is needed to have 'head'. See comment at the beginning of file.
+      - name: Set base URL, Hugo environment
+        run: |
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            echo "BASE_URL=https://<YOUR_DOMAIN>" >> "$GITHUB_ENV"
+            echo "HUGO_ENVIRONMENT=production" >> "$GITHUB_ENV"
+          else
+            echo "BASE_URL=https://head.<CLOUDFLARE_PROJECT_NAME>.pages.dev" >> "$GITHUB_ENV"
+            echo "HUGO_ENVIRONMENT=staging" >> "$GITHUB_ENV"
+          fi
+      - name: Build with Hugo
+        run: |
+          hugo \
+            --gc \
+            --minify \
+            --baseURL "${{ env.BASE_URL }}/"
+      # https://developers.cloudflare.com/workers/ci-cd/external-cicd/github-actions/
+      - name: Deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          # Cloudlflare Pages project name: <CLOUDFLARE_PROJECT_NAME>
+          #
+          # In Cloudflare 'main' is as the production branch configured.
+          # So deploying on main branch will be a production deployment.
+          command: pages deploy ./public --project-name=<CLOUDFLARE_PROJECT_NAME> --branch=${{ github.ref_name }}
+      - name: Purge Cloudflare cache
+        env:
+          # Permissions:
+          # Account   Cloudflare Pages   Edit
+          # Zone      Cache Purge        Purge
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+        run: |-
+          curl \
+          --silent \
+          --request POST \
+          --header "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+          --header "Content-Type: application/json" \
+          --data '{"purge_everything":true}' \
+          "https://api.cloudflare.com/client/v4/zones/${CLOUDFLARE_ZONE_ID}/purge_cache"
