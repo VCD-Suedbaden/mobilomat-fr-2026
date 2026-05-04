@@ -50,6 +50,9 @@ jobs:
           server: ${{ secrets.FTP_SERVER_IP }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          security: loose
           # FTP user in netcup has path / (root) for "Basisverzeichnis"
           server-dir: ${{ env.SERVER_DIR }}
           local-dir: ./public/
