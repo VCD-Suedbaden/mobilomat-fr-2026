@@ -34,7 +34,7 @@ append .position }} {{ end }} {{ end }} {{ end }} {{ $posMap = merge $posMap
     <div class="flex gap-3">
       {{ if gt $qi 0 }}
       <a
-        href="/ergebnis/frage/{{ $qi }}/"
+        href="/ergebnis/fragen/{{ $qi }}/"
         class="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-full border-2 border-vcd-petrol/40 bg-vcd-petrol-tint px-3 py-3.5 text-sm font-medium text-center hyphens-auto text-vcd-petrol-dark transition-all hover:bg-vcd-petrol/20 active:scale-[0.98] dark:border-vcd-petrol/50 dark:bg-vcd-petrol/20 dark:text-vcd-petrol dark:hover:bg-vcd-petrol/30"
       >
         <svg
@@ -51,7 +51,7 @@ append .position }} {{ end }} {{ end }} {{ end }} {{ $posMap = merge $posMap
       <div class="flex-1"></div>
       {{ end }} {{ if lt $num $total }}
       <a
-        href="/ergebnis/frage/{{ add $num 1 }}/"
+        href="/ergebnis/fragen/{{ add $num 1 }}/"
         class="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-full border-2 border-vcd-petrol/40 bg-vcd-petrol-tint px-3 py-3.5 text-sm font-medium text-center hyphens-auto text-vcd-petrol-dark transition-all hover:bg-vcd-petrol/20 active:scale-[0.98] dark:border-vcd-petrol/50 dark:bg-vcd-petrol/20 dark:text-vcd-petrol dark:hover:bg-vcd-petrol/30"
       >
         {{ add $qi 2 }}. {{ (index $questions (add $qi 1)).topic }}
@@ -78,6 +78,6 @@ append .position }} {{ end }} {{ end }} {{ end }} {{ $posMap = merge $posMap
 </div>
 
 <script>
-  initErgebnisFragePage({{ $qi }}, {{ $posMap | jsonify | safeJS }});
+  initErgebnisFragenPage({{ $qi }}, {{ $posMap | jsonify | safeJS }});
 </script>
 {{ end }}

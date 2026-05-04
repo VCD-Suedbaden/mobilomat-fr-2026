@@ -101,7 +101,7 @@ function initErgebnisPage(shareTitle) {
     el.href = `/ergebnis/kandidat/${el.dataset.kandidatLink}/?a=${PARAM}`;
   });
   document.querySelectorAll("[data-frage-link]").forEach((el) => {
-    el.href = `/ergebnis/frage/${el.dataset.frageLink}/?a=${PARAM}`;
+    el.href = `/ergebnis/fragen/${el.dataset.frageLink}/?a=${PARAM}`;
   });
   document.querySelectorAll("[data-ans-qi]").forEach((el) => {
     renderBadge(el, answers.get(Number(el.dataset.ansQi)));
@@ -173,7 +173,7 @@ function initErgebnisPage(shareTitle) {
     });
 }
 
-function initErgebnisFragePage(qi, candidatePositions) {
+function initErgebnisFragenPage(qi, candidatePositions) {
   const param = new URLSearchParams(location.search).get("a") || "";
   const answers = parseAnswers(param);
   if (param)
