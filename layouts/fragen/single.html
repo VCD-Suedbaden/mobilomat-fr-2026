@@ -13,6 +13,7 @@ cond $isLast "/ergebnis/" (printf "/fragen/%d/" (add $qi 2)) }}
           href="/fragen/{{ add $i 1 }}/"
           class="progress-seg flex items-center justify-center rounded-sm {{ if eq $i $qi }}flex-2 h-9 bg-vcd-petrol{{ else }}flex-1 h-7 bg-stone-300 dark:bg-stone-700{{ end }}"
           data-qi="{{ $i }}"
+          style="view-transition-name: fragen-progress-bar-chip-{{ $i }};"
           ><span
             class="text-[11px] font-black leading-none text-white drop-shadow-[0_0_2px_rgba(0,0,0,0.3)] sm:text-sm"
             >{{ add $i 1 }}</span
@@ -24,7 +25,7 @@ cond $isLast "/ergebnis/" (printf "/fragen/%d/" (add $qi 2)) }}
   </div>
 
   <div class="mx-auto w-full max-w-lg sm:max-w-2xl p-4 sm:p-6">
-    <div class="card mb-5">
+    <div class="card mb-5" style="view-transition-name: frage">
       <h2 class="mb-3">{{ $num }}. {{ $q.topic }}</h2>
       <p
         class="leading-relaxed text-stone-600 dark:text-stone-300 [&_a]:text-vcd-petrol-dark [&_a]:underline dark:[&_a]:text-vcd-petrol"
@@ -34,17 +35,33 @@ cond $isLast "/ergebnis/" (printf "/fragen/%d/" (add $qi 2)) }}
     </div>
 
     <div class="mb-5 space-y-2.5">
-      <a data-vote="1" class="vote-btn vote-btn-pro">
+      <a
+        data-vote="1"
+        class="vote-btn vote-btn-pro"
+        style="view-transition-name: stimme-zu"
+      >
         <span class="w-7 shrink-0 text-xl">✓</span><span>Stimme zu</span>
       </a>
-      <a data-vote="0" class="vote-btn vote-btn-neutral">
+      <a
+        data-vote="0"
+        class="vote-btn vote-btn-neutral"
+        style="view-transition-name: egal-weiss-nicht"
+      >
         <span class="w-7 shrink-0 text-xl">○</span
         ><span>Egal&nbsp;/ Weiß nicht</span>
       </a>
-      <a data-vote="-1" class="vote-btn vote-btn-contra">
+      <a
+        data-vote="-1"
+        class="vote-btn vote-btn-contra"
+        style="view-transition-name: stmme-nicht-zu"
+      >
         <span class="w-7 shrink-0 text-xl">✗</span><span>Stimme nicht zu</span>
       </a>
-      <a data-skip class="vote-btn vote-btn-skip">
+      <a
+        data-skip
+        class="vote-btn vote-btn-skip"
+        style="view-transition-name: ueberspringen"
+      >
         <span class="w-7 shrink-0 text-lg">→</span><span>Überspringen</span>
       </a>
     </div>

@@ -2,6 +2,12 @@
 @import "components/font/roboto.css";
 @source "layouts";
 
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
 @theme {
   /* VCD Corporate Design Colors */
   --color-vcd-green: #aec905;
